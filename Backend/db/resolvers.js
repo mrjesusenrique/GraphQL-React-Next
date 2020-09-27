@@ -169,7 +169,7 @@ const resolvers = {
 
         buscarProducto: async (_, { texto }) => {
             const productos = await Producto.find({ $text: { $search: texto } }).limit(10);
-            
+
             return productos;
         }
     },
@@ -206,18 +206,18 @@ const resolvers = {
             const existeUsuario = await Usuario.findOne({ email });
 
             if (!existeUsuario) {
-                throw new Error("El email no se encuentra registrado en nuestra Base de Datos");
-            }
+                throw new Error("El email no se encuentra registrado");
+            };
 
             const passwordCorrecto = await bcryptjs.compare(password, existeUsuario.password);
 
             if (!passwordCorrecto) {
                 throw new Error("El password es incorrecto");
-            }
+            };
 
             return {
                 token: crearToken(existeUsuario, process.env.SECRETA, '8h')
-            }
+            };
         },
 
         nuevoProducto: async (_, { input }) => {
