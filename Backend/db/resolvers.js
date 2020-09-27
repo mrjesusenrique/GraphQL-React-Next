@@ -182,7 +182,7 @@ const resolvers = {
             const existeUsuario = await Usuario.findOne({ email });
 
             if (existeUsuario) {
-                throw new Error("Este email ya está registrado en nuestra Base de Datos");
+                throw new Error("El email ya está registrado");
 
             } else {
 
