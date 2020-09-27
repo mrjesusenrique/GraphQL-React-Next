@@ -65,7 +65,7 @@ const NuevaCuenta = () => {
                 }, 4000);
 
             } catch (error) {
-                setState(error.message.replace('GraphQL error: ', ''));
+                setState(error.message);
 
                 setTimeout(() => {
                     setState(null);
