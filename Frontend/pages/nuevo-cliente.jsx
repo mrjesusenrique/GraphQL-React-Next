@@ -1,9 +1,60 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Layout from '../components/Layout';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { gql, useMutation } from '@apollo/client';
+import { useRouter } from 'next/router';
+
+const NUEVO_CLIENTE = gql`
+    mutation nuevoCliente($input: ClienteInput){
+            nuevoCliente(input: $input){
+            id
+            nombre
+            apellido
+            empresa
+            email
+            telefono
+        }
+    }
+`;
+
+const OBTENER_CLIENTES_USUARIO = gql`
+    query obtenerClientesVendedor {
+        obtenerClientesVendedor {
+            id
+            nombre
+            apellido
+            empresa
+            email
+            telefono
+        }
+    }
+`;
 
 const nuevoCliente = () => {
+
+    const router = useRouter();
+
+    const [state, setState] = useState(null);
+
+    const [nuevoCliente] = useMutation(NUEVO_CLIENTE, {
+
+        update(cache, { data: { nuevoCliente } }) {
+
+            // Obtener el objeto de Cache que deseamos actualizar
+
+            const { obtenerClientesVendedor } = cache.readQuery({ query: OBTENER_CLIENTES_USUARIO });
+
+            // Reescribimos el cache ( el cache nunca se debe modificar, se debe reescribir )
+
+            cache.writeQuery({
+                query: OBTENER_CLIENTES_USUARIO,
+                data: {
+                    obtenerClientesVendedor: [...obtenerClientesVendedor, nuevoCliente]
+                }
+            });
+        }
+    });
 
     const formik = useFormik({
         initialValues: {
@@ -22,14 +73,48 @@ const nuevoCliente = () => {
             telefono: Yup.number()
         }),
 
-        onSubmit: valores => {
-            console.log(valores);
+        onSubmit: async valores => {
+            const { nombre, apellido, empresa, email, telefono } = valores;
+
+            try {
+                const { data } = await nuevoCliente({
+                    variables: {
+                        input: {
+                            nombre,
+                            apellido,
+                            empresa,
+                            email,
+                            telefono
+                        }
+                    }
+                });
+
+                console.log(data.nuevoCliente);
+                router.push('/')
+
+            } catch (error) {
+                setState(error.message);
+
+                setTimeout(() => {
+                    setState(null);
+                }, 4000);
+            };
         }
     });
+
+    const mostrarMensaje = () => {
+        return (
+            <div className="bg-gray-400 border-b-4 border-red-500 py-2 px-3 w-full my-3 max-w-sm text-center mx-auto">
+                <p>{state}</p>
+            </div>
+        );
+    };
 
     return (
         <Layout>
             <h1 className="text-2xl text-gray-800 font-light">Nuevo Cliente</h1>
+
+            {state && mostrarMensaje()}
 
             <div className="flex justify-center mt-5">
                 <div className="w-full max-w-lg">
