@@ -29,11 +29,19 @@ const Index = () => {
   console.log(loading);
   console.log(error);
 
-  if (loading) return 'Cargando...';
+  if (loading === true) {
 
-  if (!data.obtenerClientesVendedor) {
-    return router.push('/login');
+    return (
+      <p>Cargando...</p>
+    );
+
+  } else if (!data.obtenerClientesVendedor) {
+
+    return (
+      router.push('/login')
+    );
   };
+
 
   return (
     <div>
@@ -52,6 +60,7 @@ const Index = () => {
               <th className="w-1/6 py-2">Email</th>
               <th className="w-1/6 py-2">Teléfono</th>
               <th className="w-1/6 py-2">Eliminar</th>
+              <th className="w-1/6 py-2">Editar</th>
             </tr>
           </thead>
 
