@@ -64,7 +64,6 @@ const editarCliente = () => {
             <p>Cargando...</p>
         );
     } else {
-        console.log(data.obtenerCliente);
         var { obtenerCliente } = data;
     };
 
