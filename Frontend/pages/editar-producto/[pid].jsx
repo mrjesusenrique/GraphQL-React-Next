@@ -29,6 +29,8 @@ const ACTUALIZAR_PRODUCTO = gql`
 
 const editarProducto = () => {
 
+    // De esta manera obtenemos el ID del producto
+
     const router = useRouter();
     const { query: { id } } = router;
 
@@ -159,7 +161,7 @@ const editarProducto = () => {
                                     ) : null
                                     }
 
-                                    <input type="submit" className="bg-green-700 w-full mt-5 p-2 text-white uppercase text-light hover:bg-green-800" value="Registrar Producto" />
+                                    <input type="submit" className="bg-green-700 w-full mt-5 p-2 text-white uppercase text-light hover:bg-green-800" value="Editar Producto" />
                                 </form>
                             )
                         }}

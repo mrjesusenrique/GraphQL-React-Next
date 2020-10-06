@@ -36,7 +36,6 @@ const editarCliente = () => {
 
     const router = useRouter();
     const { query: { id } } = router;
-    console.log(id);
 
     // Query o consulta para obtener Clientes
 
@@ -51,6 +50,8 @@ const editarCliente = () => {
 
     const [actualizarCliente] = useMutation(ACTUALIZAR_CLIENTE);
 
+    // Schema de validación
+
     const schemaValidacion = Yup.object({
         nombre: Yup.string().required('El campo nombre es obligatorio'),
         apellido: Yup.string().required('El campo apellido es obligatorio'),
@@ -63,13 +64,16 @@ const editarCliente = () => {
         return (
             <p>Cargando...</p>
         );
-    } else {
-        var { obtenerCliente } = data;
+    } else if (!data) {
+        return (
+            <h1>Acción no permitida</h1>
+        );
     };
 
     // Modificar el cliente en la Base de Datos
 
-    const actualizarInfoCliente = async (valores) => {
+    const actualizarInfoCliente = async valores => {
+
         const { nombre, apellido, empresa, email, telefono } = valores;
 
         try {
@@ -86,18 +90,20 @@ const editarCliente = () => {
                 }
             });
 
+            router.push('/');
+
             Swal.fire(
                 'Actualizado',
                 'El cliente se actualizó correctamente',
                 'success'
             );
 
-            router.push('/');
-
         } catch (error) {
             console.log(error);
         };
     };
+
+    var { obtenerCliente } = data;
 
     return (
         <Layout>
