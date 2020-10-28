@@ -41,7 +41,7 @@ const AsignarProducto = () => {
 
     return (
         <>
-            <h1 className='mt-10 my-2 bg-white border-l-4 border-gray-800 text-gray-700 p-2 text-sm'>1.- Asigna un producto al pedido</h1>
+            <h1 className='mt-10 my-2 bg-white border-l-4 border-gray-800 text-gray-700 p-2 text-sm'>2.- Asigna uno o más productos al pedido</h1>
 
             <Select
                 className='mt-3'
@@ -50,7 +50,7 @@ const AsignarProducto = () => {
                 isMulti={true}
                 getOptionValue={(opciones) => opciones.id}
                 getOptionLabel={(opciones) => `${opciones.nombre} - ${opciones.existencia} disponibles`}
-                placeholder="Busque o eleccione producto"
+                placeholder="Busque o seleccione producto"
                 noOptionsMessage={() => 'No hay resultados'}
             />
         </>
