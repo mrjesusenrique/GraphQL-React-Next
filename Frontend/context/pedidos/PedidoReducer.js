@@ -1,7 +1,9 @@
-import { SELECCIONAR_CLIENTE, SELECCIONAR_PRODUCTO, CANTIDAD_PRODUCTO } from '../../types';
+import { SELECCIONAR_CLIENTE, SELECCIONAR_PRODUCTO, CANTIDAD_PRODUCTOS } from '../../types';
 
 export default (state, action) => {
+
     switch (action.type) {
+
         case SELECCIONAR_CLIENTE:
             return {
                 ...state,
@@ -12,7 +14,13 @@ export default (state, action) => {
             return {
                 ...state,
                 productos: action.payload
-            }
+            };
+
+        case CANTIDAD_PRODUCTOS:
+            return {
+                ...state,
+                productos: state.productos.map(producto => producto.id === action.payload.id ? producto = action.payload : producto)
+            };
 
         default:
             return state;

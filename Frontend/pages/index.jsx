@@ -42,7 +42,6 @@ const Index = () => {
     );
   };
 
-
   return (
     <div>
       <Layout>
