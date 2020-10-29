@@ -328,7 +328,7 @@ const resolvers = {
                 const producto = await Producto.findById(id);
 
                 if (articulo.cantidad > producto.existencia) {
-                    throw new Error(`El artículo: ${producto.nombre} excede la cantidad disponible`);
+                    throw new Error(`La cantidad seleccionada de: ${producto.nombre} excede la disponibilidad`);
                 } else {
 
                     producto.existencia = producto.existencia - articulo.cantidad;
@@ -368,7 +368,7 @@ const resolvers = {
                     const producto = await Producto.findById(id);
 
                     if (articulo.cantidad > producto.existencia) {
-                        throw new Error(`El artículo: ${producto.nombre} excede la cantidad disponible`);
+                        throw new Error(`La cantidad seleccionada de: ${producto.nombre} excede la disponibilidad`);
                     } else {
 
                         producto.existencia = producto.existencia - articulo.cantidad;
