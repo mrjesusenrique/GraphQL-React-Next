@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import PedidoContext from '../../context/pedidos/PedidoContext';
 
 const Total = () => {
 
-    const total = 200;
+    const pedidoContext = useContext(PedidoContext);
+    const { total } = pedidoContext;
 
     return (
         <div className="flex items-center mt-5 justify-between bg-gray-300 p-3">

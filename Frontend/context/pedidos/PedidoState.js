@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 import PedidoContext from './PedidoContext';
-import { SELECCIONAR_CLIENTE, SELECCIONAR_PRODUCTO, CANTIDAD_PRODUCTOS } from '../../types';
+import { SELECCIONAR_CLIENTE, SELECCIONAR_PRODUCTO, CANTIDAD_PRODUCTOS, ACTUALIZAR_TOTAL } from '../../types';
 import PedidoReducer from './PedidoReducer';
 
 const PedidoState = ({ children }) => {
@@ -27,21 +27,42 @@ const PedidoState = ({ children }) => {
 
     // Modifica los productos
 
-    const agregarProducto = (productos) => {
+    const agregarProducto = (productosSeleccionados) => {
+
+        let nuevoState;
+        if (state.productos.length > 0) {
+
+            // Tomar del segundo arreglo un copia y asignarlo al primero
+
+            nuevoState = productosSeleccionados.map(producto => {
+                const nuevoObjeto = state.productos.find(productoState => productoState.id === producto.id);
+                return { ...producto, ...nuevoObjeto };
+            });
+
+        } else {
+            nuevoState = productosSeleccionados;
+        };
 
         dispatch({
             type: SELECCIONAR_PRODUCTO,
-            payload: productos
+            payload: nuevoState
         });
     };
 
     // Modifica las cantidades de los productos 
 
     const cantidadProductos = (nuevoProducto) => {
-        
+
         dispatch({
             type: CANTIDAD_PRODUCTOS,
             payload: nuevoProducto
+        });
+    };
+
+    const actualizarTotal = () => {
+
+        dispatch({
+            type: ACTUALIZAR_TOTAL
         });
     };
 
@@ -49,10 +70,13 @@ const PedidoState = ({ children }) => {
     return (
         <PedidoContext.Provider
             value={{
+                cliente: state.cliente,
                 productos: state.productos,
+                total: state.total,
                 agregarCliente,
                 agregarProducto,
-                cantidadProductos
+                cantidadProductos,
+                actualizarTotal
             }}
         >
             {children}

@@ -12,7 +12,12 @@ import PedidoContext from '../context/pedidos/PedidoContext';
 const nuevoPedido = () => {
 
     // Utilizar Context (extraer funciones y valores)
-    const pedidoContext = useContext(PedidoContext)
+    const pedidoContext = useContext(PedidoContext);
+    const { cliente, productos, total } = pedidoContext;
+
+    const validarPedido = () => {
+        return !productos.every(producto => producto.cantidad > 0) || total === 0 || cliente.length === 0 ? "opacity-50 cursor-not-allowed" : "";
+    };
 
     return (
         <Layout>
@@ -27,7 +32,7 @@ const nuevoPedido = () => {
 
                     <button
                         type="button"
-                        className={`bg-green-800 w-full mt-5 p-2 text-white uppercase font-bold hover:bg-green-900`}
+                        className={`bg-green-800 w-full mt-5 p-2 text-white uppercase font-bold hover:bg-green-900 ${validarPedido()}`}
                     >
                         Registrar pedido
                     </button>
