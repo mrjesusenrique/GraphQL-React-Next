@@ -45,6 +45,7 @@ const typeDefs = gql`
     type PedidoGrupo {
         id: ID
         cantidad: Int
+        nombre: String
     }
 
     type TopCliente {
