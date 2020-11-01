@@ -32,7 +32,7 @@ const ACTUALIZAR_CLIENTE = gql`
 
 const editarCliente = () => {
 
-    // De esta menera ontenermos el ID del cliente que queremos editar 
+    // De esta menera optenermos el ID del cliente que queremos editar 
 
     const router = useRouter();
     const { query: { id } } = router;
@@ -40,7 +40,7 @@ const editarCliente = () => {
     // Query o consulta para obtener Clientes
 
 
-    const { data, loading, error } = useQuery(OBTENER_CLIENTE, {
+    const { data, loading } = useQuery(OBTENER_CLIENTE, {
         variables: {
             id
         }

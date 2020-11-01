@@ -23,20 +23,15 @@ const Index = () => {
 
   // Consulta de Apollo
 
-  const { data, loading, error } = useQuery(OBTENER_CLIENTES_USUARIO);
+  const { data, loading } = useQuery(OBTENER_CLIENTES_USUARIO);
 
-  console.log(data);
-  console.log(loading);
-  console.log(error);
-
-  if (loading === true) {
+  if (loading) {
 
     return (
-      <p>Cargando...</p>
+      <h1>Cargando...</h1>
     );
 
   } else if (!data.obtenerClientesVendedor) {
-
     return (
       router.push('/login')
     );
