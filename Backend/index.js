@@ -27,9 +27,8 @@ const server = new ApolloServer({
     }
 });
 
-mongoose.set('useFindAndModify', false);
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/CRMGraphQL', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://localhost:27017/CRMGraphQL', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
     .then(() => {
         try {
             console.log('La conexión a la Base de Datos se ha realizado con éxito!');
