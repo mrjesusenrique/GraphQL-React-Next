@@ -133,6 +133,9 @@ const resolvers = {
                     }
                 },
                 {
+                    $limit: 10
+                },
+                {
                     $sort: { total: -1 }
                 }
             ]);
@@ -215,7 +218,7 @@ const resolvers = {
             };
 
             return {
-                token: crearToken(existeUsuario, process.env.SECRETA, '8h')
+                token: crearToken(existeUsuario, process.env.SECRETA, '24h')
             };
         },
 
