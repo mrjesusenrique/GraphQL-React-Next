@@ -40,7 +40,7 @@ const pedidos = () => {
             <h1 className="text-2xl text-gray-800 font-light">Pedidos</h1>
 
             <Link href="/nuevo-pedido">
-                <a className="bg-green-800 py-2 px-5 mt-5 inline-block text-white rounded text-sm hover:bg-green-700 mb-3 uppercase">Nuevo Pedido</a>
+                <a className="bg-green-800 py-2 px-5 mt-5 inline-block text-white rounded text-sm hover:bg-green-700 mb-3 uppercase w-full lg:w-auto text-center">Nuevo Pedido</a>
             </Link>
 
             {

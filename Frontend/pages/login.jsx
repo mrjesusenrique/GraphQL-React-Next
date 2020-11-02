@@ -49,8 +49,10 @@ const Login = () => {
 
                 setState('Autenticando...');
 
-                const { token } = data.autenticarUsuario;
-                localStorage.setItem('token', token);
+                setTimeout(() => {
+                    const { token } = data.autenticarUsuario;
+                    localStorage.setItem('token', token);
+                }, 1000);
 
                 setTimeout(() => {
                     setState(null);

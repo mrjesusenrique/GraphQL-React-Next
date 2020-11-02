@@ -60,9 +60,9 @@ const editarCliente = () => {
         telefono: Yup.number()
     });
 
-    if (loading === true) {
+    if (loading) {
         return (
-            <p>Cargando...</p>
+            <h1>Cargando...</h1>
         );
     } else if (!data) {
         return (
@@ -93,7 +93,7 @@ const editarCliente = () => {
             router.push('/');
 
             Swal.fire(
-                'Actualizado',
+                'Correcto',
                 'El cliente se actualizó correctamente',
                 'success'
             );
@@ -113,16 +113,15 @@ const editarCliente = () => {
                 <div className="w-full max-w-lg">
 
                     <Formik
-                        validationSchema={schemaValidacion}
                         enableReinitialize
+                        validationSchema={schemaValidacion}
                         initialValues={obtenerCliente}
-                        onSubmit={(valores) => {
+                        onSubmit={valores => {
                             actualizarInfoCliente(valores);
                         }}
                     >
 
                         {props => {
-
                             return (
 
                                 <form

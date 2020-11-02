@@ -19,7 +19,7 @@ const productos = () => {
 
     // Consultar los productos 
 
-    const { data, loading, error } = useQuery(OBTENER_PRODUCTOS);
+    const { data, loading } = useQuery(OBTENER_PRODUCTOS);
 
     if (loading === true) {
         return (
@@ -32,26 +32,27 @@ const productos = () => {
             <h1 className="text-2xl text-gray-800 font-light">Productos</h1>
 
             <Link href="nuevo-producto">
-                <a className="bg-green-800 py-2 px-5 mt-5 inline-block text-white rounded text-sm hover:bg-green-700 mb-3 uppercase">Nuevo Producto</a>
+                <a className="bg-green-800 py-2 px-5 mt-5 inline-block text-white rounded text-sm hover:bg-green-700 mb-3 uppercase w-full lg:w-auto text-center">Nuevo Producto</a>
             </Link>
+            <div className="overflow-x-scroll">
+                <table className="table-auto shadow-md mt-10 w-full w-lg">
+                    <thead className="bg-indigo-800">
+                        <tr className="text-white">
+                            <th className="w-1/6 py-2">Nombre</th>
+                            <th className="w-1/6 py-2">Existencia</th>
+                            <th className="w-1/6 py-2">Precio</th>
+                            <th className="w-1/6 py-2">Eliminar</th>
+                            <th className="w-1/6 py-2">Editar</th>
+                        </tr>
+                    </thead>
 
-            <table className="table-auto shadow-md mt-10 w-full w-lg">
-                <thead className="bg-indigo-800">
-                    <tr className="text-white">
-                        <th className="w-1/6 py-2">Nombre</th>
-                        <th className="w-1/6 py-2">Existencia</th>
-                        <th className="w-1/6 py-2">Precio</th>
-                        <th className="w-1/6 py-2">Eliminar</th>
-                        <th className="w-1/6 py-2">Editar</th>
-                    </tr>
-                </thead>
-
-                <tbody className="bg-white text-center">
-                    {data.obtenerProductos.map(producto => (
-                        <Producto key={producto.id} producto={producto} />
-                    ))}
-                </tbody>
-            </table>
+                    <tbody className="bg-white text-center">
+                        {data.obtenerProductos.map(producto => (
+                            <Producto key={producto.id} producto={producto} />
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </Layout>
     );
 };

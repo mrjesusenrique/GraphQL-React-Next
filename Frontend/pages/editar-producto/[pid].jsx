@@ -36,7 +36,7 @@ const editarProducto = () => {
 
     // Consulta para obtener el producto
 
-    const { data, loading, error } = useQuery(OBTENER_PRODUCTO, {
+    const { data, loading } = useQuery(OBTENER_PRODUCTO, {
         variables: {
             id
         }
@@ -54,7 +54,7 @@ const editarProducto = () => {
         precio: Yup.number().required('El precio es obligatorio').positive('El número ingresado debe ser mayor o igual a cero')
     });
 
-    if (loading === true) {
+    if (loading) {
         return (
             <h1>Cargando...</h1>
         );

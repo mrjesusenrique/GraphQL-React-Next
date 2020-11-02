@@ -43,27 +43,29 @@ const Index = () => {
         <h1 className="text-2xl text-gray-800 font-light">Clientes</h1>
 
         <Link href="/nuevo-cliente">
-          <a className="bg-green-800 py-2 px-5 mt-5 inline-block text-white rounded text-sm hover:bg-green-700 mb-3 uppercase">Nuevo Cliente</a>
+          <a className="bg-green-800 py-2 px-5 mt-5 inline-block text-white rounded text-sm hover:bg-green-700 mb-3 uppercase w-full lg:w-auto text-center">Nuevo Cliente</a>
         </Link>
 
-        <table className="table-auto shadow-md mt-10 w-full w-lg">
-          <thead className="bg-indigo-800">
-            <tr className="text-white">
-              <th className="w-1/6 py-2">Nombre</th>
-              <th className="w-1/6 py-2">Empresa</th>
-              <th className="w-1/6 py-2">Email</th>
-              <th className="w-1/6 py-2">Teléfono</th>
-              <th className="w-1/6 py-2">Eliminar</th>
-              <th className="w-1/6 py-2">Editar</th>
-            </tr>
-          </thead>
+        <div className="overflow-x-scroll">
+          <table className="table-auto shadow-md mt-10 w-full w-lg">
+            <thead className="bg-indigo-800">
+              <tr className="text-white">
+                <th className="w-1/6 py-2">Nombre</th>
+                <th className="w-1/6 py-2">Empresa</th>
+                <th className="w-1/6 py-2">Email</th>
+                <th className="w-1/6 py-2">Teléfono</th>
+                <th className="w-1/6 py-2">Eliminar</th>
+                <th className="w-1/6 py-2">Editar</th>
+              </tr>
+            </thead>
 
-          <tbody className="bg-white text-center">
-            {data.obtenerClientesVendedor.map(cliente => (
-              <Cliente key={cliente.id} cliente={cliente} />
-            ))}
-          </tbody>
-        </table>
+            <tbody className="bg-white text-center">
+              {data.obtenerClientesVendedor.map(cliente => (
+                <Cliente key={cliente.id} cliente={cliente} />
+              ))}
+            </tbody>
+          </table>
+        </div>
 
       </Layout>
     </div>
